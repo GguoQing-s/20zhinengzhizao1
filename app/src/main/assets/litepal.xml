@@ -2,6 +2,7 @@
 <litepal>
     <dbname  value="Service"></dbname>
     <version value="128"></version>
+    <version value="127"></version>
     <list>
         <mapping class="com.example.a20zhinengzhizao1.bean1.User2"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Jbxxsql"></mapping>
