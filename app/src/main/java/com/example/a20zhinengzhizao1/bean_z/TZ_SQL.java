@@ -7,11 +7,11 @@ public class TZ_SQL extends LitePalSupport {
 
 
     private int id,state;
-    private String neirong, time, requestInfo, is;
+    private String neirong, time, requestInfo, stris;
 
-    public TZ_SQL(int state,String is, String neirong, String time) {
+    public TZ_SQL(int state,String stris, String neirong, String time) {
         this.state = state;
-        this.is = is;
+        this.stris = stris;
         this.neirong = neirong;
         this.time = time;
     }
@@ -43,12 +43,12 @@ public class TZ_SQL extends LitePalSupport {
         this.requestInfo = requestInfo;
     }
 
-    public String getIs() {
-        return is;
+    public String getStris() {
+        return stris;
     }
 
-    public void setIs(String is) {
-        this.is = is;
+    public void setStris(String stris) {
+        this.stris = stris;
     }
 
     public String getNeirong() {

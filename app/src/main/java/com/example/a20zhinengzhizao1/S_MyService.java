@@ -821,12 +821,13 @@ public class S_MyService extends NanoHTTPD {
                     sql.save();
                     return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
                 case "/get_notifi_info":
-                    List<TZ_SQL> tz_sqls = LitePal.where("is=?", "1").find(TZ_SQL.class);
+                    List<TZ_SQL> tz_sqls = LitePal.where("state=?", "1").find(TZ_SQL.class);
                     JSONArray jsonArray20 = new JSONArray();
                     for (int i = 0; i < tz_sqls.size(); i++) {
                         TZ_SQL tz_sql = tz_sqls.get(i);
                         JSONObject jsonObject24 = new JSONObject();
                         jsonObject24.put("id", tz_sql.getId());
+                        jsonObject24.put("name",tz_sql.getStris());
                         jsonObject24.put("nr", tz_sql.getNeirong());
                         jsonObject24.put("time", tz_sql.getTime());
                         jsonArray20.put(jsonObject24);
