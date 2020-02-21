@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">20zhinengzhizao1</string>
+    <string-array name="wx">
+        <item>发动机起动困难</item>
+        <item>燃油消耗反常</item>
+        <item>照明系统失灵</item>
+        <item>漏水</item>
+        <item>爆胎</item>
+        <item>不着车</item>
+        <item>漏油</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="zt">
+        <item>全部</item>
+        <item>已修</item>
+        <item>未修</item>
+    </string-array>
+    <string-array name="lx">
+        <item>轿车</item>
+        <item>SUV</item>
+    </string-array>
+</resources>

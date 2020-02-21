@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/s_hand"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="20sp"
+                android:layout_width="300dp"
+                android:id="@+id/tx"
+                android:layout_height="300dp"
+                android:src="@drawable/touxiang_2"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/name"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/sex"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/zy"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/xx"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/email"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/tel"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/sr"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/jg"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/xl"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/jl"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:id="@+id/yx"
+                        android:textSize="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:textSize="30dp"
+                        android:id="@+id/hj"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_marginTop="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:text="返回"
+                    android:textSize="30dp"
+                    android:id="@+id/fanhui"
+                    android:background="@drawable/biankuang1"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

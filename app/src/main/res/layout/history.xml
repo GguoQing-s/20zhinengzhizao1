@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include layout="@layout/rcsc_header"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/bh"
+            android:text="编号"
+            android:textColor="#000"
+            android:textSize="35dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/com_name"
+            android:text="公司名称"
+            android:textColor="#000"
+            android:textSize="35dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/gw"
+            android:text="岗位名称"
+            android:textColor="#000"
+            android:textSize="35dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/name"
+            android:text="审核人"
+            android:textColor="#000"
+            android:textSize="35dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/time"
+            android:text="审核时间"
+            android:textColor="#000"
+            android:textSize="35dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+</LinearLayout>

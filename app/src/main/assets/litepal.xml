@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname  value="Service"></dbname>
+    <version value="117"></version>
+    <list>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.User2"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Jbxxsql"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Application"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.MaterialA"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Transaction1"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Warehousing"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Shipment1"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Order1"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Ktdga"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Scx"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Repair1"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Automobile"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.entity.ContactInfor"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.VehicleA2"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.sql.YlInfor"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.sql.HistoryInfor"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.sql.ProviderInfor"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.sql.YlInfo"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Fbzp2"></mapping>
+    </list>
+</litepal>

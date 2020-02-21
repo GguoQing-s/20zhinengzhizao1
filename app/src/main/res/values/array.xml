@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="xl">
+        <item>小学</item>
+        <item>初中</item>
+        <item>高中</item>
+        <item>大专</item>
+        <item>本科</item>
+        <item>研究生</item>
+        <item>博士</item>
+        <item>硕士</item>
+    </string-array>
+    <string-array name="scx">
+        <item>柴油机生产线</item>
+        <item>饮水机生产线</item>
+        <item>开关器生产线</item>
+        <item>豆浆机生产线</item>
+        <item>净水器生产线</item>
+    </string-array>
+    <string-array name="zw">
+        <item>医生</item>
+        <item>警察</item>
+        <item>建筑工人</item>
+        <item>农民</item>
+        <item>教师</item>
+    </string-array>
+</resources>

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="40dp"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+     <LinearLayout
+         android:gravity="center_horizontal"
+         android:orientation="vertical"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="姓名:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/name"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="性别:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <RadioGroup
+                 android:orientation="horizontal"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent">
+                 <RadioButton
+                     android:id="@+id/man"
+                     android:checked="true"
+                     android:text="男"
+                     android:textColor="#000"
+                     android:textSize="30dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent" />
+                 <RadioButton
+                     android:id="@+id/woman"
+                     android:layout_marginLeft="100dp"
+                     android:text="女"
+                     android:textColor="#000"
+                     android:textSize="30dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent" />
+             </RadioGroup>
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="专业:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/zy"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_marginRight="33dp"
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="毕业学校:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/school"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="邮件:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/email"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="电话:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/tel"
+                 android:inputType="number"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_marginRight="33dp"
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="出生日期:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/birthday"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="籍贯:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/jg"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+
+         <LinearLayout
+
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="学历:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <Spinner
+                 android:id="@+id/xl"
+                 android:entries="@array/xl"
+                 android:layout_width="500dp"
+                 android:layout_height="match_parent" />
+
+         </LinearLayout>
+         <LinearLayout
+             android:layout_marginRight="33dp"
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="工作经历:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/experience"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="200dp" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_marginRight="33dp"
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="就业意向:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/yx"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="200dp" />
+         </LinearLayout>
+
+         <LinearLayout
+
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:text="获奖:"
+                 android:textColor="#000"
+                 android:textSize="35dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             <EditText
+                 android:id="@+id/hj"
+                 android:background="@drawable/b_bg"
+                 android:layout_width="500dp"
+                 android:layout_height="200dp" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:orientation="vertical"
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="60dp"
+                    android:text="照片:"
+                    android:textColor="#000"
+                    android:textSize="35dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:text="选择照片"
+                    android:textColor="#000"
+                    android:textSize="30dp"
+                    android:id="@+id/select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="500dp"
+                    android:layout_height="500dp" />
+         </LinearLayout>
+         <LinearLayout
+            android:gravity="center_horizontal"
+             android:layout_marginTop="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+          <Button
+              android:id="@+id/upload"
+              android:text="上传"
+              android:textColor="#000"
+              android:textSize="30dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" />
+
+             <Button
+                 android:layout_marginLeft="50dp"
+                 android:id="@+id/edit"
+                 android:text="编辑"
+                 android:textColor="#000"
+                 android:textSize="30dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+         </LinearLayout>
+     </LinearLayout>
+</ScrollView>

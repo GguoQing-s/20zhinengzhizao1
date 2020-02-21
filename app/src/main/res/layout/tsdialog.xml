@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:orientation="vertical"
+    android:background="#60cccccc"
+    android:gravity="center"
+    android:layout_height="100dp">
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/tongzhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通知"
+            android:textSize="35dp"
+            />
+        <RadioButton
+            android:layout_marginLeft="20dp"
+            android:id="@+id/duanxin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="短信"
+            android:textSize="35dp"
+            />
+        <RadioButton
+            android:layout_marginLeft="20dp"
+            android:id="@+id/dianhua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话"
+            android:textSize="35dp"
+            />
+    </RadioGroup>
+</LinearLayout>

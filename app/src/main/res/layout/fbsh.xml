@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include layout="@layout/rcsc_header"/>
+    <LinearLayout
+        android:padding="100dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+     <LinearLayout
+         android:orientation="vertical"
+         android:layout_weight="1"
+         android:layout_width="0dp"
+         android:layout_height="200dp">
+         <ImageView
+             android:id="@+id/iv_fb"
+             android:layout_weight="1"
+             android:src="@drawable/landian"
+             android:layout_width="match_parent"
+             android:layout_height="0dp" />
+         <TextView
+             android:textStyle="bold"
+             android:gravity="center"
+             android:text="发布"
+             android:textColor="#000"
+             android:textSize="45dp"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content" />
+     </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="200dp">
+            <ImageView
+                android:id="@+id/sh"
+                android:layout_weight="1"
+                android:src="@drawable/landian"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="审核"
+                android:textColor="#000"
+                android:textSize="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="200dp">
+            <ImageView
+                android:id="@+id/history"
+                android:layout_weight="1"
+                android:src="@drawable/landian"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="审核历史"
+                android:textColor="#000"
+                android:textSize="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

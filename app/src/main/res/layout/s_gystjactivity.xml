@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/s_hand1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="20dp"
+            android:id="@+id/lin1"
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:id="@+id/barChart"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.BarChart>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/lin2"
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.PieChart
+                android:layout_width="match_parent"
+                android:id="@+id/pieChart"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.PieChart>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/lin3"
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.PieChart
+                android:layout_width="match_parent"
+                android:id="@+id/pieChart1"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.PieChart>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:id="@+id/lin4"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:id="@+id/barChart1"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.BarChart>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RcscActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="40dp"
+        android:gravity="center_horizontal"
+        android:background="#7CC923"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+       <ImageView
+           android:src="@drawable/touxiang_1"
+           android:layout_width="wrap_content"
+           android:layout_height="300dp" />
+        <TextView
+            android:id="@+id/jl"
+            android:text="我的简历"
+            android:textColor="#02458F"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/ckzp"
+            android:text="查看招聘信息"
+            android:textColor="#02458F"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fbzp"
+            android:text="发布招聘信息"
+            android:textColor="#02458F"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/names"
+            android:text="应聘人员列表"
+            android:textColor="#02458F"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <TextView
+       android:layout_centerInParent="true"
+        android:id="@+id/notify"
+        android:text="查看通知"
+        android:textColor="#02458F"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:gravity="center"
+        android:background="@drawable/bg_red"
+      android:layout_marginBottom="20dp"
+       android:layout_toRightOf="@id/notify"
+        android:id="@+id/count"
+        android:text="1"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+</RelativeLayout>
+        <TextView
+            android:id="@+id/back"
+            android:text="返回主页"
+            android:textColor="#02458F"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="2.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="20dp"
+            android:background="#2196F3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="200dp"
+                android:text="人才市场"
+                android:textColor="#fff"
+                android:textSize="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/s_hand1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.2"
+        android:gravity="center"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1车间生产线1状态："
+            android:textSize="35dp"
+            android:textColor="#000"
+            android:id="@+id/ztxx"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1.6"
+        android:id="@+id/lin"
+        android:orientation="horizontal"
+        android:layout_height="0dp">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.2"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="显示产品"
+            android:textSize="35dp"
+            android:id="@+id/xscp"
+            android:background="@drawable/cjbk2"
+            android:textColor="#000"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="添加产品"
+            android:id="@+id/tjcp"
+            android:background="@drawable/cjbk1"
+            android:textSize="35dp"
+            android:textColor="#000"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</LinearLayout>

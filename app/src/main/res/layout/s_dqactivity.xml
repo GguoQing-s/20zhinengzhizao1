@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/s_hand1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_marginLeft="100dp"
+                android:background="#EBEBEB"
+                android:layout_width="500dp"
+                android:layout_height="40dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/bai1"
+                    />
+                <EditText
+                    android:background="#EBEBEB"
+                    android:singleLine="true"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置"
+                android:id="@+id/sz"
+                android:textSize="30dp"
+                android:textColor="#000"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

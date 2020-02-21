@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.a20zhinengzhizao1">
+
+
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACTION_SENDTO"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <application
+        android:name=".AppClient"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service
+            android:name=".server.SQLserver"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <provider
+            android:name=".DatabaseProvider"
+            android:authorities="com.example.databasetest.provider"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activity.S_YHDLActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.S_CLKCActivity"/>
+        <activity android:name=".activity.S_XQYActivity"/>
+        <activity android:name=".activity.S_EJLDActivity3"/>
+        <activity android:name=".activity.S_EJLDActivity4"/>
+        <activity android:name=".activity.S_EJLDActivity2"/>
+        <activity android:name=".activity.S_EJLDActivity1"/>
+        <activity android:name=".activity.S_GYSTJActivity"/>
+        <activity android:name=".activity.S_PFTPActivity"/>
+        <activity android:name=".activity.S_GYSActivity"/>
+        <activity android:name=".activity.S_JCLActivity"/>
+        <activity android:name=".activity.S_JYActivity"/>
+        <activity android:name=".activity.S_GHCXActivity"/>
+        <activity android:name=".activity.S_SJFXActivity"/>
+        <activity android:name=".activity.S_YPRYActivity"/>
+        <activity android:name=".activity.S_SCActivity"/>
+        <activity android:name=".activity.WdjlActivity"/>
+        <activity android:name=".activity.ScjlActivity"/>
+        <activity android:name=".activity.RcscActivity"/>
+        <activity android:name=".activity.S_ZHAOPINActivity1"/>
+        <activity android:name=".activity.S_ZHAOPINActivity"/>
+        <activity android:name=".activity.S_ZHMMActivity"/>
+        <activity android:name=".activity.S_YHZCActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".activity.S_YFJLActivity"/>
+        <activity android:name=".activity.S_XSXQActivity"/>
+        <activity android:name=".activity.FbShActivity"/>
+        <activity android:name=".activity.FbzpActivity"/>
+        <activity android:name=".activity.HistoryActivity"/>
+        <activity android:name=".activity.ShActivity"/>
+        <activity android:name=".activity.S_XQXXActivity"/>
+        <activity android:name=".activity.S_KCActivity"/>
+        <activity android:name=".activity.S_CKLSActivity"/>
+        <activity android:name=".activity.S_CKActivity"/>
+        <activity android:name=".activity.S_CHXSXQActivity"/>
+        <activity android:name=".activity.S_CKJLActivity"/>
+        <activity android:name=".activity.S_GWCActivity"/>
+        <activity android:name=".activity.S_ZFJMActivity"/>
+        <activity android:name=".activity.S_WDDDActivity"/>
+        <activity android:name=".activity.S_CJActivity"/>
+        <activity android:name=".activity.S_WXCJActivity"/>
+        <activity android:name=".activity.S_SCXXXActivity"/>
+        <activity android:name=".activity.Z_YGXXActivity"/>
+        <activity android:name=".activity.AddEmployerActivity"/>
+        <activity android:name=".activity.S_TJKCActivity"/>
+        <activity android:name=".activity.KcDataActivity"/>
+        <activity android:name=".activity.YzActivity"/>
+        <activity android:name=".activity.KcActivity"/>
+        <activity android:name=".activity.GysXqActicity"/>
+        <activity android:name=".activity.AddCommodityActivity"/>
+        <activity android:name=".activity.ProviderSelectActivity"/>
+        <activity android:name=".activity.AlarmActivity"/>
+        <activity android:name=".activity.ProviderListActivity"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/s_hand1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1.8"
+        android:id="@+id/lin"
+        android:orientation="horizontal"
+        android:layout_height="0dp">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.2"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="按原料查询"
+            android:textSize="35dp"
+            android:id="@+id/yuanliao"
+            android:textColor="#fff"
+            android:background="@drawable/bk1"
+            android:gravity="center"
+            />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="按企业查询"
+            android:textSize="35dp"
+            android:textColor="#fff"
+            android:id="@+id/qiye"
+            android:background="@drawable/bk1"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</LinearLayout>
