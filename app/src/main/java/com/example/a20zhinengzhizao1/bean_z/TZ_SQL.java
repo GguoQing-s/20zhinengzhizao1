@@ -1,7 +1,6 @@
 package com.example.a20zhinengzhizao1.bean_z;
 
 import org.litepal.crud.LitePalSupport;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTheme;
 
 public class TZ_SQL extends LitePalSupport {
 

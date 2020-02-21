@@ -46,6 +46,7 @@ public class S_MyService extends NanoHTTPD {
     public Response serve(IHTTPSession session) {
         String uri = session.getUri();
         Map<String,String> map = new HashMap<>();
+        Map<String,String> zMap = new HashMap<>();
         JSONObject bodyJson;
         String body;
         Map<String ,String> file;
@@ -834,16 +835,18 @@ public class S_MyService extends NanoHTTPD {
                     }
                     return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
                 case "/send_notifi_info":
-                    session.parseBody(map);
-                    body = map.get("postData");
+                    session.parseBody(zMap);
+                    body = zMap.get("postData");
                     bodyJson = new JSONObject(body);
                     TZ_SQL sql = new TZ_SQL(1,bodyJson.optString("name"), bodyJson.optString("msg"), SimpData.Simp(new Date(), "yyyy-MM-dd"));
-                    sql.save();
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                   if (sql.save()) {
+                       return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                   }else {
+                       return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                   }
                 case "/get_notifi_info":
-                    List<TZ_SQL> tz_sqls = LitePal.where("sate=?", "1").find(TZ_SQL.class);
-
-
+                    List<TZ_SQL> tz_sqls = LitePal.where("state=?", "1").find(TZ_SQL.class);
+                    System.out.println("aaaaaa");
                     JSONArray jsonArray20 = new JSONArray();
                     for (int i = 0; i < tz_sqls.size(); i++) {
                         TZ_SQL tz_sql = tz_sqls.get(i);
@@ -859,14 +862,17 @@ public class S_MyService extends NanoHTTPD {
                     jsonObject20.put("ROWS_DETAIL", jsonArray20);
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject20.toString());
                 case "/request_notif_info":
-                    session.parseBody(map);
-                    body = map.get("postData");
+                    session.parseBody(zMap);
+                    body = zMap.get("postData");
                     bodyJson = new JSONObject(body);
                     TZ_SQL tz_sql = new TZ_SQL();
                     tz_sql.setState(2);
                     tz_sql.setRequestInfo(bodyJson.optString("request"));
-                    tz_sql.updateAll("id=?", bodyJson.optString("id"));
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    if (tz_sql.updateAll("id=?", bodyJson.optString("id"))!=0) {
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    }else {
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                    }
 
             }
 
