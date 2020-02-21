@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.example.a20zhinengzhizao1.bean1.Application;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
-import com.example.a20zhinengzhizao1.bean1.Fbzp2;
+import com.example.a20zhinengzhizao1.bean1.FbzpA2;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
 import com.example.a20zhinengzhizao1.bean1.MaterialA;
@@ -59,18 +59,20 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson =new JSONObject(body);
-                    Fbzp2 fbzp1 = new Fbzp2();
+                    FbzpA2 fbzp1 = new FbzpA2();
                     fbzp1.setZt(bodyJson.getString("zt"));
-                    fbzp1.updateAll("bh=? and name=?",bodyJson.getString("bh"),bodyJson.getString("name"));
+                    fbzp1.setShr(bodyJson.getString("shr"));
+                    fbzp1.setShsj(bodyJson.getString("shsj"));
+                    fbzp1.updateAll("bh=? and naem=?",bodyJson.getString("bh"),bodyJson.getString("name"));
                     JSONObject jsonObject42 = new JSONObject();
                     jsonObject42.put("RESULT","S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject42.toString());
                 case "/get_factory_fbzp":
-                    List<Fbzp2> fbzps = LitePal.findAll(Fbzp2.class);
+                    List<FbzpA2> fbzps = LitePal.findAll(FbzpA2.class);
                     JSONArray jsonArray3 = new JSONArray();
                     for (int i=0;i<fbzps.size();i++)
                     {
-                        Fbzp2 fbzp = fbzps.get(i);
+                        FbzpA2 fbzp = fbzps.get(i);
                         JSONObject jsonObject3 = new JSONObject();
                         jsonObject3.put("bh",fbzp.getBh());
                         jsonObject3.put("zt",fbzp.getZt());
@@ -101,7 +103,7 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson =new JSONObject(body);
-                    Fbzp2 fbzp = new Fbzp2();
+                    FbzpA2 fbzp = new FbzpA2();
                     fbzp.setBh(bodyJson.getString("bh"));
                     fbzp.setZt(bodyJson.getString("zt"));
                     fbzp.setNaem(bodyJson.getString("name"));
