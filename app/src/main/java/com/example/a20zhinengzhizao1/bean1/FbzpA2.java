@@ -6,6 +6,7 @@ public class FbzpA2 extends LitePalSupport {
     private String bh ,zt,naem,xl,hy,szd,gzdz,tel,email,gw,xz,zyyq,gzjlyq,gwyq,shr,shsj,time;
 
     public FbzpA2() {
+
     }
 
     public String getShr() {

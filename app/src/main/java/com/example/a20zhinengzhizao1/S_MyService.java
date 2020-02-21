@@ -8,6 +8,7 @@ import com.example.a20zhinengzhizao1.bean1.Application;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
 
 import com.example.a20zhinengzhizao1.bean1.FbzpA2;
+import com.example.a20zhinengzhizao1.bean1.Gyslb;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
 import com.example.a20zhinengzhizao1.bean1.MaterialA;
@@ -15,6 +16,7 @@ import com.example.a20zhinengzhizao1.bean1.Order1;
 import com.example.a20zhinengzhizao1.bean1.Repair1;
 import com.example.a20zhinengzhizao1.bean1.Scx;
 import com.example.a20zhinengzhizao1.bean1.Shipment1;
+import com.example.a20zhinengzhizao1.bean1.Tjyl;
 import com.example.a20zhinengzhizao1.bean1.Transaction1;
 import com.example.a20zhinengzhizao1.bean1.User2;
 import com.example.a20zhinengzhizao1.bean1.VehicleA2;
@@ -57,6 +59,92 @@ public class S_MyService extends NanoHTTPD {
         }
         try {
             switch (uri) {
+                case "/get_gyslb":
+                    List<Gyslb> gyslbs = LitePal.findAll(Gyslb.class);
+                    JSONArray jsonArray22 = new JSONArray();
+                    for (int i=0;i<gyslbs.size();i++)
+                    {
+                        Gyslb gyslb = gyslbs.get(i);
+                        JSONObject jsonObject3 = new JSONObject();
+                        jsonObject3.put("gysbh",gyslb.getGysbh());
+                        jsonObject3.put("mc",gyslb.getMc());
+                        jsonObject3.put("cs",gyslb.getCs());
+                        jsonObject3.put("dd",gyslb.getDd());
+                        jsonObject3.put("fr",gyslb.getFr());
+                        jsonObject3.put("lxr",gyslb.getLxr());
+                        jsonObject3.put("tel",gyslb.getTel());
+                        jsonObject3.put("ywfw",gyslb.getYwfw());
+                        jsonObject3.put("image",gyslb.getImage());
+
+                        jsonArray22.put(jsonObject3);
+                    }
+                    JSONObject jsonObject46 = new JSONObject();
+                    jsonObject46.put("ROWS_DETAIL",jsonArray22);
+                    jsonObject46.put("RESULT","S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject46.toString());
+
+
+
+                case "/set_gyslb":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson =new JSONObject(body);
+                    Gyslb gyslb = new Gyslb();
+
+                    gyslb.setGysbh(bodyJson.getString("gysbh"));
+                    gyslb.setMc(bodyJson.getString("mc"));
+                    gyslb.setCs(bodyJson.getString("cs"));
+                    gyslb.setDd(bodyJson.getString("dd"));
+                    gyslb.setFr(bodyJson.getString("fr"));
+                    gyslb.setLxr(bodyJson.getString("lxr"));
+                    gyslb.setTel(bodyJson.getString("tel"));
+                    gyslb.setYwfw(bodyJson.getString("ywfw"));
+                    gyslb.setImage(bodyJson.getString("image"));
+                    gyslb.save();
+                    JSONObject jsonObject45 = new JSONObject();
+                    jsonObject45.put("RESULT","S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject45.toString());
+
+
+
+
+                case "/get_tjyl":
+                    List<Tjyl> tjyls = LitePal.findAll(Tjyl.class);
+                    JSONArray jsonArray21 = new JSONArray();
+                    for (int i=0;i<tjyls.size();i++)
+                    {
+                        Tjyl tjyl = tjyls.get(i);
+                        JSONObject jsonObject3 = new JSONObject();
+                        jsonObject3.put("gssbh",tjyl.getGysbh());
+                        jsonObject3.put("ylmc",tjyl.getYlmc());
+                        jsonObject3.put("ylbh",tjyl.getYlbh());
+                        jsonObject3.put("jg",tjyl.getJg());
+                        jsonObject3.put("path",tjyl.getPath());
+                        jsonArray21.put(jsonObject3);
+                    }
+                    JSONObject jsonObject44 = new JSONObject();
+                    jsonObject44.put("ROWS_DETAIL",jsonArray21);
+                    jsonObject44.put("RESULT","S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject44.toString());
+
+
+                case "/set_tjyl":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson =new JSONObject(body);
+                    Tjyl tjyl = new Tjyl();
+
+                    tjyl.setGysbh(bodyJson.getString("gysbh"));
+                    tjyl.setYlmc(bodyJson.getString("ylmc"));
+                    tjyl.setYlbh(bodyJson.getString("ylbh"));
+                    tjyl.setJg(bodyJson.getString("jg"));
+                    tjyl.setPath(bodyJson.getString("path"));
+                    tjyl.save();
+                    JSONObject jsonObject43 = new JSONObject();
+                    jsonObject43.put("RESULT","S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject43.toString());
+
+
 
                 case "/update_factory_fbzp":
                     session.parseBody(map);
