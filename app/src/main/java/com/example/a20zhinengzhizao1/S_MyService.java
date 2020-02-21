@@ -6,7 +6,8 @@ import android.util.Log;
 
 import com.example.a20zhinengzhizao1.bean1.Application;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
-import com.example.a20zhinengzhizao1.bean1.Fbzp2;
+
+import com.example.a20zhinengzhizao1.bean1.FbzpA2;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
 import com.example.a20zhinengzhizao1.bean1.MaterialA;
@@ -18,6 +19,7 @@ import com.example.a20zhinengzhizao1.bean1.Transaction1;
 import com.example.a20zhinengzhizao1.bean1.User2;
 import com.example.a20zhinengzhizao1.bean1.VehicleA2;
 import com.example.a20zhinengzhizao1.bean1.Warehousing;
+import com.example.a20zhinengzhizao1.bean_z.TZ_SQL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 import org.litepal.LitePal;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,18 +62,20 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson = new JSONObject(body);
-                    Fbzp2 fbzp1 = new Fbzp2();
+                    FbzpA2 fbzp1 = new FbzpA2();
+                    fbzp1.setShr(bodyJson.getString("shr"));
+                    fbzp1.setShsj(bodyJson.getString("shsj"));
                     fbzp1.setZt(bodyJson.getString("zt"));
-                    fbzp1.updateAll("bh=? and name=?",bodyJson.getString("bh"),bodyJson.getString("name"));
+                    fbzp1.updateAll("bh=? and naem=?",bodyJson.getString("bh"),bodyJson.getString("name"));
                     JSONObject jsonObject42 = new JSONObject();
                     jsonObject42.put("RESULT", "S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject42.toString());
                 case "/get_factory_fbzp":
-                    List<Fbzp2> fbzps = LitePal.findAll(Fbzp2.class);
+                    List<FbzpA2> fbzps = LitePal.findAll(FbzpA2.class);
                     JSONArray jsonArray3 = new JSONArray();
                     for (int i=0;i<fbzps.size();i++)
                     {
-                        Fbzp2 fbzp = fbzps.get(i);
+                        FbzpA2 fbzp = fbzps.get(i);
                         JSONObject jsonObject3 = new JSONObject();
                         jsonObject3.put("bh",fbzp.getBh());
                         jsonObject3.put("zt",fbzp.getZt());
@@ -101,7 +106,7 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson =new JSONObject(body);
-                    Fbzp2 fbzp = new Fbzp2();
+                    FbzpA2 fbzp = new FbzpA2();
                     fbzp.setBh(bodyJson.getString("bh"));
                     fbzp.setZt(bodyJson.getString("zt"));
                     fbzp.setNaem(bodyJson.getString("name"));
@@ -836,7 +841,7 @@ public class S_MyService extends NanoHTTPD {
                     sql.save();
                     return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
                 case "/get_notifi_info":
-                    List<TZ_SQL> tz_sqls = LitePal.where("is=?", "1").find(TZ_SQL.class);
+                    List<TZ_SQL> tz_sqls = LitePal.where("sate=?", "1").find(TZ_SQL.class);
                     JSONArray jsonArray20 = new JSONArray();
                     for (int i = 0; i < tz_sqls.size(); i++) {
                         TZ_SQL tz_sql = tz_sqls.get(i);
