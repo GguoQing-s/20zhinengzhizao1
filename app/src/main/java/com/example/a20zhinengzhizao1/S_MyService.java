@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.example.a20zhinengzhizao1.bean1.Application;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
-import com.example.a20zhinengzhizao1.bean1.FbzpA2;
+import com.example.a20zhinengzhizao1.bean1.Fbzp2;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
 import com.example.a20zhinengzhizao1.bean1.MaterialA;
@@ -58,21 +58,19 @@ public class S_MyService extends NanoHTTPD {
                 case "/update_factory_fbzp":
                     session.parseBody(map);
                     body = map.get("postData");
-                    bodyJson =new JSONObject(body);
-                    FbzpA2 fbzp1 = new FbzpA2();
+                    bodyJson = new JSONObject(body);
+                    Fbzp2 fbzp1 = new Fbzp2();
                     fbzp1.setZt(bodyJson.getString("zt"));
-                    fbzp1.setShr(bodyJson.getString("shr"));
-                    fbzp1.setShsj(bodyJson.getString("shsj"));
-                    fbzp1.updateAll("bh=? and naem=?",bodyJson.getString("bh"),bodyJson.getString("name"));
+                    fbzp1.updateAll("bh=? and name=?",bodyJson.getString("bh"),bodyJson.getString("name"));
                     JSONObject jsonObject42 = new JSONObject();
-                    jsonObject42.put("RESULT","S");
+                    jsonObject42.put("RESULT", "S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject42.toString());
                 case "/get_factory_fbzp":
-                    List<FbzpA2> fbzps = LitePal.findAll(FbzpA2.class);
+                    List<Fbzp2> fbzps = LitePal.findAll(Fbzp2.class);
                     JSONArray jsonArray3 = new JSONArray();
                     for (int i=0;i<fbzps.size();i++)
                     {
-                        FbzpA2 fbzp = fbzps.get(i);
+                        Fbzp2 fbzp = fbzps.get(i);
                         JSONObject jsonObject3 = new JSONObject();
                         jsonObject3.put("bh",fbzp.getBh());
                         jsonObject3.put("zt",fbzp.getZt());
@@ -103,7 +101,7 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson =new JSONObject(body);
-                    FbzpA2 fbzp = new FbzpA2();
+                    Fbzp2 fbzp = new Fbzp2();
                     fbzp.setBh(bodyJson.getString("bh"));
                     fbzp.setZt(bodyJson.getString("zt"));
                     fbzp.setNaem(bodyJson.getString("name"));
@@ -830,6 +828,38 @@ public class S_MyService extends NanoHTTPD {
                         return null;
                     }
                     return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                case "/send_notifi_info":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson = new JSONObject(body);
+                    TZ_SQL sql = new TZ_SQL(1,bodyJson.optString("name"), bodyJson.optString("msg"), SimpData.Simp(new Date(), "yyyy-MM-dd"));
+                    sql.save();
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                case "/get_notifi_info":
+                    List<TZ_SQL> tz_sqls = LitePal.where("is=?", "1").find(TZ_SQL.class);
+                    JSONArray jsonArray20 = new JSONArray();
+                    for (int i = 0; i < tz_sqls.size(); i++) {
+                        TZ_SQL tz_sql = tz_sqls.get(i);
+                        JSONObject jsonObject24 = new JSONObject();
+                        jsonObject24.put("id", tz_sql.getId());
+                        jsonObject24.put("nr", tz_sql.getNeirong());
+                        jsonObject24.put("time", tz_sql.getTime());
+                        jsonArray20.put(jsonObject24);
+                    }
+                    JSONObject jsonObject20 = new JSONObject();
+                    jsonObject20.put("RESULT", "S");
+                    jsonObject20.put("ROWS_DETAIL", jsonArray20);
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject20.toString());
+                case "/request_notif_info":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson = new JSONObject(body);
+                    TZ_SQL tz_sql = new TZ_SQL();
+                    tz_sql.setState(2);
+                    tz_sql.setRequestInfo(bodyJson.optString("request"));
+                    tz_sql.updateAll("id=?", bodyJson.optString("id"));
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+
             }
 
         } catch (JSONException e) {
