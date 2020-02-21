@@ -2,10 +2,10 @@ package com.example.a20zhinengzhizao1.bean1;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Fbzp2 extends LitePalSupport {
+public class FbzpA2 extends LitePalSupport {
     private String bh ,zt,naem,xl,hy,szd,gzdz,tel,email,gw,xz,zyyq,gzjlyq,gwyq,shr,shsj,time;
 
-    public Fbzp2() {
+    public FbzpA2() {
     }
 
     public String getShr() {
