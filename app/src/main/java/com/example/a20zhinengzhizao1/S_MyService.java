@@ -60,6 +60,61 @@ public class S_MyService extends NanoHTTPD {
         }
         try {
             switch (uri) {
+
+
+                case "/update_gyslb":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson =new JSONObject(body);
+                    Gyslb gyslb1 = new Gyslb();
+                    gyslb1.setGysbh(bodyJson.getString("gysbh"));
+                    gyslb1.setMc(bodyJson.getString("mc"));
+                    gyslb1.setCs(bodyJson.getString("cs"));
+                    gyslb1.setDd(bodyJson.getString("dd"));
+                    gyslb1.setFr(bodyJson.getString("fr"));
+                    gyslb1.setLxr(bodyJson.getString("lxr"));
+                    gyslb1.setTel(bodyJson.getString("tel"));
+                    gyslb1.setYwfw(bodyJson.getString("ywfw"));
+                    gyslb1.setImage(bodyJson.getString("image"));
+                    gyslb1.updateAll("gysbh=? and mc=?",bodyJson.getString("gysbh"),bodyJson.getString("mc"));
+                    JSONObject jsonObject50 = new JSONObject();
+                    jsonObject50.put("RESULT", "S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject50.toString());
+
+
+
+                case "/update_tjyl":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson =new JSONObject(body);
+                    Tjyl tjyl1 = new Tjyl();
+                    tjyl1.setGysbh(bodyJson.getString("gysbh"));
+                    tjyl1.setYlmc(bodyJson.getString("ylmc"));
+                    tjyl1.setYlbh(bodyJson.getString("ylbh"));
+                    tjyl1.setJg(bodyJson.getString("jg"));
+                    tjyl1.setPath(bodyJson.getString("path"));
+                    tjyl1.updateAll("gysbh=? and ylbh=?",bodyJson.getString("gysbh"),bodyJson.getString("ylbh"));
+                    JSONObject jsonObject49 = new JSONObject();
+                    jsonObject49.put("RESULT", "S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject49.toString());
+
+                case "/delete_tjyl":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson = new JSONObject(body);
+                    LitePal.deleteAll(Tjyl.class,"gysbh=? and ylbh=?",bodyJson.getString("bh"),bodyJson.getString("ylbh"));
+                    JSONObject jsonObject48 = new JSONObject();
+                    jsonObject48.put("RESULT", "S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject48.toString());
+
+                case "/delete_gylls":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson = new JSONObject(body);
+                    LitePal.deleteAll(Gyslb.class,"gysbh=? and mc=?",bodyJson.getString("bh"),bodyJson.getString("name"));
+                    JSONObject jsonObject47 = new JSONObject();
+                    jsonObject47.put("RESULT", "S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject47.toString());
                 case "/get_gyslb":
                     List<Gyslb> gyslbs = LitePal.findAll(Gyslb.class);
                     JSONArray jsonArray22 = new JSONArray();
