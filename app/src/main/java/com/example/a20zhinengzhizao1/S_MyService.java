@@ -127,8 +127,6 @@ public class S_MyService extends NanoHTTPD {
                     jsonObject44.put("ROWS_DETAIL",jsonArray21);
                     jsonObject44.put("RESULT","S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject44.toString());
-
-
                 case "/set_tjyl":
                     session.parseBody(map);
                     body = map.get("postData");
@@ -597,7 +595,7 @@ public class S_MyService extends NanoHTTPD {
                         JSONObject jsonObject  =new JSONObject();
                         jsonObject.put("name",warehousing.getName());
                         jsonObject.put("xh",warehousing.getXh());
-                        jsonObject.put("gys",warehousing.getGys());
+                        jsonObject.put("gysbh",warehousing.getGys());
                         jsonObject.put("shuliang",warehousing.getShuliang());
                         jsonObject.put("dj",warehousing.getDj());
                         jsonObject.put("weizhi",warehousing.getWeizhi());
@@ -621,7 +619,7 @@ public class S_MyService extends NanoHTTPD {
                     Warehousing warehousing = new Warehousing();
                     warehousing.setName(bodyJson.getString("name"));
                     warehousing.setXh(bodyJson.getString("xh"));
-                    warehousing.setGys(bodyJson.getString("gys"));
+                    warehousing.setGys(bodyJson.getString("gysbh"));
                     warehousing.setShuliang(bodyJson.getString("shuliang"));
                     warehousing.setDj(bodyJson.getString("dj"));
                     warehousing.setWeizhi(bodyJson.getString("weizhi"));
