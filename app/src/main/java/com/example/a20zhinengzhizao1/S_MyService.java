@@ -182,8 +182,6 @@ public class S_MyService extends NanoHTTPD {
                     jsonObject44.put("ROWS_DETAIL",jsonArray21);
                     jsonObject44.put("RESULT","S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject44.toString());
-
-
                 case "/set_tjyl":
                     session.parseBody(map);
                     body = map.get("postData");
