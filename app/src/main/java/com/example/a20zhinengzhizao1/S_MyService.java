@@ -595,7 +595,7 @@ public class S_MyService extends NanoHTTPD {
                         JSONObject jsonObject  =new JSONObject();
                         jsonObject.put("name",warehousing.getName());
                         jsonObject.put("xh",warehousing.getXh());
-                        jsonObject.put("gysbh",warehousing.getGys());
+                        jsonObject.put("gys",warehousing.getGys());
                         jsonObject.put("shuliang",warehousing.getShuliang());
                         jsonObject.put("dj",warehousing.getDj());
                         jsonObject.put("weizhi",warehousing.getWeizhi());
@@ -619,7 +619,7 @@ public class S_MyService extends NanoHTTPD {
                     Warehousing warehousing = new Warehousing();
                     warehousing.setName(bodyJson.getString("name"));
                     warehousing.setXh(bodyJson.getString("xh"));
-                    warehousing.setGys(bodyJson.getString("gysbh"));
+                    warehousing.setGys(bodyJson.getString("gys"));
                     warehousing.setShuliang(bodyJson.getString("shuliang"));
                     warehousing.setDj(bodyJson.getString("dj"));
                     warehousing.setWeizhi(bodyJson.getString("weizhi"));
