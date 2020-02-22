@@ -2,21 +2,40 @@ package com.example.a20zhinengzhizao1.bean1;
 
 import org.litepal.crud.LitePalSupport;
 
-public class MaterialA extends LitePalSupport {
-    private String name,xinghao,changshang,chengshi;
-    private String path;
+public class MaterialA1 extends LitePalSupport {
+    private String name,xinghao,changshang,chengshi,path,kcl,wz;
 
-    public MaterialA() {
+    public MaterialA1() {
     }
 
 
     @Override
     public String toString() {
-        return "Material{" +
+        return "MaterialA{" +
                 "name='" + name + '\'' +
                 ", xinghao='" + xinghao + '\'' +
-                ", path=" + path +
+                ", changshang='" + changshang + '\'' +
+                ", chengshi='" + chengshi + '\'' +
+                ", path='" + path + '\'' +
+                ", kcl='" + kcl + '\'' +
+                ", wz='" + wz + '\'' +
                 '}';
+    }
+
+    public String getKcl() {
+        return kcl;
+    }
+
+    public void setKcl(String kcl) {
+        this.kcl = kcl;
+    }
+
+    public String getWz() {
+        return wz;
+    }
+
+    public void setWz(String wz) {
+        this.wz = wz;
     }
 
     public String getChangshang() {

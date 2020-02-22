@@ -11,7 +11,7 @@ import com.example.a20zhinengzhizao1.bean1.FbzpA2;
 import com.example.a20zhinengzhizao1.bean1.Gyslb;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
-import com.example.a20zhinengzhizao1.bean1.MaterialA;
+import com.example.a20zhinengzhizao1.bean1.MaterialA1;
 import com.example.a20zhinengzhizao1.bean1.Order1;
 import com.example.a20zhinengzhizao1.bean1.Repair1;
 import com.example.a20zhinengzhizao1.bean1.Scx;
@@ -731,17 +731,19 @@ public class S_MyService extends NanoHTTPD {
                     jsonObject13.put("RESULT","S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject13.toString());
                 case "/get_supplier_material":
-                    List<MaterialA> materials = LitePal.findAll(MaterialA.class);
+                    List<MaterialA1> materials = LitePal.findAll(MaterialA1.class);
                     JSONArray jsonArray6 = new JSONArray();
                     for (int i=0;i<materials.size();i++)
                     {
-                        MaterialA material = materials.get(i);
+                        MaterialA1 material = materials.get(i);
                         JSONObject jsonObject5 = new JSONObject();
                         jsonObject5.put("path",material.getPath());
                         jsonObject5.put("name",material.getName());
                         jsonObject5.put("xh",material.getXinghao());
                         jsonObject5.put("cshang",material.getChangshang());
                         jsonObject5.put("cs",material.getChengshi());
+                        jsonObject5.put("kcl",material.getKcl());
+                        jsonObject5.put("wz",material.getWz());
                         jsonArray6.put(jsonObject5);
                     }
                     JSONObject jsonObject12 = new JSONObject();
@@ -753,12 +755,14 @@ public class S_MyService extends NanoHTTPD {
                     body = map.get("postData");
                     bodyJson =new JSONObject(body);
 
-                    MaterialA material = new MaterialA();
+                    MaterialA1 material = new MaterialA1();
                     material.setPath(bodyJson.getString("path"));
                     material.setName(bodyJson.getString("name"));
                     material.setXinghao(bodyJson.getString("xh"));
                     material.setChangshang(bodyJson.getString("cshang"));
                     material.setChengshi(bodyJson.getString("cs"));
+                    material.setKcl(bodyJson.getString("kcl"));
+                    material.setWz(bodyJson.getString("wz"));
                     material.save();
                     JSONObject jsonObject11 = new JSONObject();
                     jsonObject11.put("RESULT","S");

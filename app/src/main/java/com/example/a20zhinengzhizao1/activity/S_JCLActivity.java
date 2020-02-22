@@ -6,7 +6,6 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,6 +48,10 @@ public class S_JCLActivity extends AppCompatActivity {
     @BindView(R.id.add)
     Button add;
     private final int CHOOSE_PHOTO = 2;
+    @BindView(R.id.kcl)
+    EditText kcl;
+    @BindView(R.id.wz)
+    EditText wz;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,15 +64,17 @@ public class S_JCLActivity extends AppCompatActivity {
     public void onQdClicked() {
         VolleyTo volleyTo = new VolleyTo();
         volleyTo.setUrl("set_supplier_material")
-                .setJsonObject("path",lj.getText().toString())
-                .setJsonObject("name",xm.getText().toString())
-                .setJsonObject("xh",xh.getText().toString())
-                .setJsonObject("cshang",cshang.getText().toString())
-                .setJsonObject("cs",cs.getText().toString())
+                .setJsonObject("path", lj.getText().toString())
+                .setJsonObject("name", xm.getText().toString())
+                .setJsonObject("xh", xh.getText().toString())
+                .setJsonObject("cshang", cshang.getText().toString())
+                .setJsonObject("cs", cs.getText().toString())
+                .setJsonObject("kcl",kcl.getText().toString())
+                .setJsonObject("wz", wz.getText().toString())
                 .setVolleyLo(new VolleyLo() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        Toast.makeText(S_JCLActivity.this,"添加成功",Toast.LENGTH_LONG).show();
+                        Toast.makeText(S_JCLActivity.this, "添加成功", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -89,11 +94,13 @@ public class S_JCLActivity extends AppCompatActivity {
             openAlbum();
         }
     }
+
     private void openAlbum() {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
         startActivityForResult(intent, CHOOSE_PHOTO);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -153,7 +160,7 @@ public class S_JCLActivity extends AppCompatActivity {
 
     private String getImagePath(Uri uri, String selection) {
         String path = null;
-        Cursor cursor =getContentResolver().query(uri, null, selection, null, null);
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
