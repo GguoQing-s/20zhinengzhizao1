@@ -7,17 +7,26 @@ import org.litepal.crud.LitePalSupport;
  */
 public class YLYZ  extends LitePalSupport {
     private int id;
-    private String name;
+    private String name,num;
     private String path;
     private int number;
 
     public YLYZ() {
     }
 
-    public YLYZ(String name, String path, int number) {
+    public YLYZ(String name, String num, String path, int number) {
         this.name = name;
+        this.num = num;
         this.path = path;
         this.number = number;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public int getId() {

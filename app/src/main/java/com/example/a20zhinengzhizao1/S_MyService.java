@@ -72,6 +72,7 @@ public class S_MyService extends NanoHTTPD {
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject1.put("id", i + 1);
                         jsonObject1.put("name", ylyz.getName());
+                        jsonObject1.put("num", ylyz.getNum());
                         jsonObject1.put("path", ylyz.getPath());
                         jsonObject1.put("yz", ylyz.getNumber());
                         jsonArray555.put(jsonObject1);
@@ -131,7 +132,7 @@ public class S_MyService extends NanoHTTPD {
                     body = map.get("postData");
                     bodyJson = new JSONObject(body);
                     LitePal.deleteAll(Tjyl.class, "gysbh=? and ylbh=?", bodyJson.getString("bh"), bodyJson.getString("ylbh"));
-                    LitePal.deleteAll(YLYZ.class, "name=?", bodyJson.getString("ylbh"));
+                    LitePal.deleteAll(YLYZ.class, "name=? and num=?", bodyJson.getString("ylbh"),bodyJson.getString("bh"));
                     JSONObject jsonObject48 = new JSONObject();
                     jsonObject48.put("RESULT", "S");
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject48.toString());
@@ -217,7 +218,7 @@ public class S_MyService extends NanoHTTPD {
                     tjyl.setJg(bodyJson.getString("jg"));
                     tjyl.setPath(bodyJson.getString("path"));
                     tjyl.save();
-                    YLYZ ylyz2 = new YLYZ(bodyJson.getString("ylmc"), bodyJson.getString("path")
+                    YLYZ ylyz2 = new YLYZ(bodyJson.getString("ylmc"),bodyJson.getString("gysbh"), bodyJson.getString("path")
                             , 100);
                     ylyz2.save();
                     JSONObject jsonObject43 = new JSONObject();
