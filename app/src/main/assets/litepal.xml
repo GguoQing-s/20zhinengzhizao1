@@ -2,6 +2,7 @@
 <litepal>
     <dbname  value="Service"></dbname>
     <version value="136"></version>
+    <version value="137"></version>
     <list>
         <mapping class="com.example.a20zhinengzhizao1.bean1.User2"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Jbxxsql"></mapping>
@@ -25,5 +26,6 @@
         <mapping class="com.example.a20zhinengzhizao1.bean_z.TZ_SQL"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Tjyl"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Gyslb"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean_z.YLYZ"></mapping>
     </list>
 </litepal>
