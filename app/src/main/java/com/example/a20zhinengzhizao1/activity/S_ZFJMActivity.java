@@ -69,7 +69,6 @@ public class S_ZFJMActivity extends AppCompatActivity {
         sl = getIntent().getStringExtra("sl");
         name=getIntent().getStringExtra("name");
         je=getIntent().getStringExtra("jg");
-     //   Log.d("1111111111", "onCreate: -----"+xh+"   "+sl);
         url="车辆名称："+getIntent().getStringExtra("name")+"      付款金额："+getIntent().getStringExtra("jg");
         inview();
         new Thread(new Runnable() {
