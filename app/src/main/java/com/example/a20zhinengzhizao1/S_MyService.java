@@ -22,13 +22,13 @@ import com.example.a20zhinengzhizao1.bean1.User2;
 import com.example.a20zhinengzhizao1.bean1.VehicleA2;
 import com.example.a20zhinengzhizao1.bean1.Warehousing;
 import com.example.a20zhinengzhizao1.bean_z.TZ_SQL;
+import com.example.a20zhinengzhizao1.bean_z.YGXX;
 import com.example.a20zhinengzhizao1.bean_z.YLYZ;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
-import org.litepal.crud.LitePalSupport;
 
 import java.io.IOException;
 import java.util.Date;
@@ -64,6 +64,106 @@ public class S_MyService extends NanoHTTPD {
         }
         try {
             switch (uri) {
+                case "/add_ygxx_info":
+                    session.parseBody(zMap);
+                    body = zMap.get("postData");
+                    bodyJson = new JSONObject(body);
+                    try {
+                        YGXX ygxx = new YGXX();
+                        ygxx.setName(bodyJson.getString("name"));
+                        ygxx.setSex(bodyJson.getString("sex"));
+                        ygxx.setBirth(bodyJson.getString("birth"));
+                        ygxx.setTel(bodyJson.getString("tel"));
+                        ygxx.setScx(bodyJson.getString("scx"));
+                        ygxx.setZw(bodyJson.getString("zw"));
+                        ygxx.setEmail(bodyJson.getString("email"));
+                        ygxx.setAddress(bodyJson.getString("address"));
+                        ygxx.save();
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                    }
+                case "/delete_all_ygxx":
+                    LitePal.deleteAll(YGXX.class);
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                case "/delete_single_ygxx":
+                    session.parseBody(zMap);
+                    body = zMap.get("postData");
+                    bodyJson = new JSONObject(body);
+                    try {
+                        LitePal.deleteAll(YGXX.class, "id=? and name=?", bodyJson.getString("id"), bodyJson.getString("name"));
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                    }
+
+                case "/get_all_ygcx":
+                    List<YGXX> ygxxes = LitePal.findAll(YGXX.class);
+                    JSONArray jsonArrayz9 = new JSONArray();
+                    for (int i = 0; i < ygxxes.size(); i++) {
+                        YGXX ygxx2 = ygxxes.get(i);
+                        JSONObject jsonObject11 = new JSONObject();
+                        jsonObject11.put("id", ygxx2.getId());
+                        jsonObject11.put("name", ygxx2.getName());
+                        jsonObject11.put("sex", ygxx2.getSex());
+                        jsonObject11.put("birth", ygxx2.getBirth());
+                        jsonObject11.put("tel", ygxx2.getTel());
+                        jsonObject11.put("scx", ygxx2.getScx());
+                        jsonObject11.put("zw", ygxx2.getZw());
+                        jsonObject11.put("email", ygxx2.getEmail());
+                        jsonObject11.put("address", ygxx2.getAddress());
+                        jsonArrayz9.put(jsonObject11);
+                    }
+                    JSONObject jsonObjectz11 = new JSONObject();
+                    jsonObjectz11.put("RESULT", "S");
+                    jsonObjectz11.put("ROWS_DETAIL", jsonArrayz9);
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObjectz11.toString());
+                case "/get_like_ygcx":
+                    session.parseBody(zMap);
+                    body = zMap.get("postData");
+                    bodyJson = new JSONObject(body);
+                    List<YGXX> ygxxes2 =  LitePal.where("name like ?", "%" + bodyJson.getString("name") + "%").find(YGXX.class);
+                    JSONArray jsonArrayz1 = new JSONArray();
+                    for (int i = 0; i < ygxxes2.size(); i++) {
+                        YGXX ygxx2 = ygxxes2.get(i);
+                        JSONObject jsonObject11 = new JSONObject();
+                        jsonObject11.put("id", ygxx2.getId());
+                        jsonObject11.put("name", ygxx2.getName());
+                        jsonObject11.put("sex", ygxx2.getSex());
+                        jsonObject11.put("birth", ygxx2.getBirth());
+                        jsonObject11.put("tel", ygxx2.getTel());
+                        jsonObject11.put("scx", ygxx2.getScx());
+                        jsonObject11.put("zw", ygxx2.getZw());
+                        jsonObject11.put("email", ygxx2.getEmail());
+                        jsonObject11.put("address", ygxx2.getAddress());
+                        jsonArrayz1.put(jsonObject11);
+                    }
+                    JSONObject jsonObjectz1 = new JSONObject();
+                    jsonObjectz1.put("RESULT", "S");
+                    jsonObjectz1.put("ROWS_DETAIL", jsonArrayz1);
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObjectz1.toString());
+
+                case "/update_ygxx":
+                    session.parseBody(zMap);
+                    body = zMap.get("postData");
+                    bodyJson = new JSONObject(body);
+                    try {
+                        YGXX ygxx = new YGXX();
+                        ygxx.setSex(bodyJson.getString("sex"));
+                        ygxx.setBirth(bodyJson.getString("birth"));
+                        ygxx.setTel(bodyJson.getString("tel"));
+                        ygxx.setScx(bodyJson.getString("scx"));
+                        ygxx.setZw(bodyJson.getString("zw"));
+                        ygxx.setEmail(bodyJson.getString("email"));
+                        ygxx.setAddress(bodyJson.getString("address"));
+                        ygxx.updateAll("id=? and name=?", bodyJson.getString("id"), bodyJson.getString("name"));
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                    }
                 case "/get_yl_yz":
                     List<YLYZ> ylyzs = LitePal.findAll(YLYZ.class);
                     JSONArray jsonArray555 = new JSONArray();
@@ -87,9 +187,8 @@ public class S_MyService extends NanoHTTPD {
                     bodyJson = new JSONObject(body);
                     YLYZ ylyz = new YLYZ();
                     ylyz.setNumber(bodyJson.optInt("yz"));
-                    ylyz.updateAll("name=?",bodyJson.optString("ylmc"));
-                    return newFixedLengthResponse(Response.Status.OK,"application/json","{\"RESULT\": \"S\"}");
-
+                    ylyz.updateAll("name=?", bodyJson.optString("ylmc"));
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"S\"}");
 
 
                 case "/update_gyslb":
@@ -770,8 +869,8 @@ public class S_MyService extends NanoHTTPD {
                     material.setKcl(bodyJson.getString("kcl"));
                     material.setWz(bodyJson.getString("wz"));
                     material.save();
-                    YLYZ ylyz1 = new YLYZ(bodyJson.getString("name"),bodyJson.getString("xh")
-                            ,bodyJson.getString("path"),100);
+                    YLYZ ylyz1 = new YLYZ(bodyJson.getString("name"), bodyJson.getString("xh")
+                            , bodyJson.getString("path"), 100);
                     ylyz1.save();
                     JSONObject jsonObject11 = new JSONObject();
                     jsonObject11.put("RESULT", "S");
