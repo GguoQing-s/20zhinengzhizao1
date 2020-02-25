@@ -9,7 +9,7 @@ import com.example.a20zhinengzhizao1.bean1.Application1;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
 import com.example.a20zhinengzhizao1.bean1.FbzpA2;
 import com.example.a20zhinengzhizao1.bean1.Gyslb;
-import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
+import com.example.a20zhinengzhizao1.bean1.Jbxxsql1;
 import com.example.a20zhinengzhizao1.bean1.JlA;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
 import com.example.a20zhinengzhizao1.bean1.MaterialA1;
@@ -924,10 +924,10 @@ public class S_MyService2 extends NanoHTTPD {
                     jsonObject8.put("RESULT", "S");
                     return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject8.toString());
                 case "/get_factory_information":
-                    List<Jbxxsql> jbxxes = LitePal.findAll(Jbxxsql.class);
+                    List<Jbxxsql1> jbxxes = LitePal.findAll(Jbxxsql1.class);
                     JSONArray jsonArray4 = new JSONArray();
                     for (int i = 0; i < jbxxes.size(); i++) {
-                        Jbxxsql jbxx = jbxxes.get(i);
+                        Jbxxsql1 jbxx = jbxxes.get(i);
                         JSONObject jsonObject3 = new JSONObject();
                         jsonObject3.put("name", jbxx.getName());
                         jsonObject3.put("sex", jbxx.getSex());
@@ -954,7 +954,7 @@ public class S_MyService2 extends NanoHTTPD {
                     
                     session.parseBody(map);
                         bodyJson = new JSONObject(map.get("postData"));
-                    Jbxxsql jbxx1 = new Jbxxsql();
+                    Jbxxsql1 jbxx1 = new Jbxxsql1();
                     jbxx1.setName(bodyJson.getString("name"));
                     jbxx1.setSex(bodyJson.getString("sex"));
                     jbxx1.setZy(bodyJson.getString("zy"));
@@ -979,7 +979,7 @@ public class S_MyService2 extends NanoHTTPD {
                     
                     session.parseBody(map);
                         bodyJson = new JSONObject(map.get("postData"));
-                    Jbxxsql jbxx = new Jbxxsql();
+                    Jbxxsql1 jbxx = new Jbxxsql1();
                     jbxx.setName(bodyJson.getString("name"));
                     jbxx.setSex(bodyJson.getString("sex"));
                     jbxx.setZy(bodyJson.getString("zy"));

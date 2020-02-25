@@ -2,10 +2,10 @@ package com.example.a20zhinengzhizao1.bean1;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Jbxxsql extends LitePalSupport {
+public class Jbxxsql1 extends LitePalSupport {
     private String name,sex,zy,xx,email,tel,crjg,jg,xl,gzjl,jyxx,hj,path,user;
 
-    public Jbxxsql() {
+    public Jbxxsql1() {
     }
 
     @Override
