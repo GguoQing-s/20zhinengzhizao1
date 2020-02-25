@@ -10,6 +10,7 @@ import com.example.a20zhinengzhizao1.bean1.Automobile;
 import com.example.a20zhinengzhizao1.bean1.FbzpA2;
 import com.example.a20zhinengzhizao1.bean1.Gyslb;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
+import com.example.a20zhinengzhizao1.bean1.JlA;
 import com.example.a20zhinengzhizao1.bean1.Ktdga;
 import com.example.a20zhinengzhizao1.bean1.MaterialA1;
 import com.example.a20zhinengzhizao1.bean1.Order1;
@@ -64,6 +65,40 @@ public class S_MyService extends NanoHTTPD {
         }
         try {
             switch (uri) {
+
+                case "/get_jl":
+                    List<JlA> jls = LitePal.findAll(JlA.class);
+                    JSONArray jsonArray23 = new JSONArray();
+                    for (int i = 0; i < jls.size(); i++) {
+                        JlA jl = jls.get(i);
+                        JSONObject jsonObject3 = new JSONObject();
+                        jsonObject3.put("file", jl.getFile());
+                        jsonObject3.put("mc", jl.getMc());
+                        jsonObject3.put("bz", jl.getBz());
+                        jsonObject3.put("yhm", jl.getYhm());
+                        jsonObject3.put("time", jl.getTime());
+                        jsonArray23.put(jsonObject3);
+                    }
+                    JSONObject jsonObject54 = new JSONObject();
+                    jsonObject54.put("ROWS_DETAIL", jsonArray23);
+                    jsonObject54.put("RESULT", "S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject54.toString());
+
+
+                case "/set_tj":
+                    session.parseBody(map);
+                    body = map.get("postData");
+                    bodyJson = new JSONObject(body);
+                    JlA jl = new JlA();
+                    jl.setFile(bodyJson.getString("file"));
+                    jl.setMc(bodyJson.getString("mc"));
+                    jl.setBz(bodyJson.getString("bz"));
+                    jl.setYhm(bodyJson.getString("yhm"));
+                    jl.setTime(bodyJson.getString("time"));
+                    jl.save();
+                    JSONObject jsonObject52 = new JSONObject();
+                    jsonObject52.put("RESULT", "S");
+                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject52.toString());
                 case "/add_ygxx_info":
                     session.parseBody(zMap);
                     body = zMap.get("postData");
