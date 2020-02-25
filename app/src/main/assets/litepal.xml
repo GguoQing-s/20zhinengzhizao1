@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname  value="Service"></dbname>
-    <version value="140"></version>
+    <version value="150"></version>
     <list>
         <mapping class="com.example.a20zhinengzhizao1.bean1.User2"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Jbxxsql"></mapping>
@@ -27,5 +27,6 @@
         <mapping class="com.example.a20zhinengzhizao1.bean1.Gyslb"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean_z.YLYZ"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean_z.YGXX"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.JlA"></mapping>
     </list>
 </litepal>
