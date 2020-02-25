@@ -8,7 +8,9 @@ import android.util.Log;
 
 import com.example.a20zhinengzhizao1.AppClient;
 import com.example.a20zhinengzhizao1.S_MyService;
+import com.example.a20zhinengzhizao1.Web.S_MyService2;
 
+import java.io.File;
 import java.io.IOException;
 
 public class BaseActivity extends AppCompatActivity {
@@ -19,12 +21,14 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApp = (AppClient) getApplication();
-        myWebServer  = new S_MyService(3333,mApp);
+
         try {
-            myWebServer.start();
+            new S_MyService2(8099,mApp).start();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         Log.d("------------------", "onCreate: "+getPackageCodePath());
     }
 

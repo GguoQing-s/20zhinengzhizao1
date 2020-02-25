@@ -1,12 +1,12 @@
-package com.example.a20zhinengzhizao1;
+package com.example.a20zhinengzhizao1.Web;
 
 
 import android.util.Log;
 
-
+import com.example.a20zhinengzhizao1.AppClient;
+import com.example.a20zhinengzhizao1.SimpData;
 import com.example.a20zhinengzhizao1.bean1.Application1;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
-
 import com.example.a20zhinengzhizao1.bean1.FbzpA2;
 import com.example.a20zhinengzhizao1.bean1.Gyslb;
 import com.example.a20zhinengzhizao1.bean1.Jbxxsql;
@@ -29,6 +29,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
+import org.nanohttpd.protocols.http.IHTTPSession;
+import org.nanohttpd.protocols.http.NanoHTTPD;
+import org.nanohttpd.protocols.http.response.Response;
+import org.nanohttpd.protocols.http.response.Status;
 
 import java.io.IOException;
 import java.util.Date;
@@ -37,20 +41,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import fi.iki.elonen.NanoHTTPD;
 
-public class S_MyService extends NanoHTTPD {
+public class S_MyService2 extends NanoHTTPD {
     public static final int PORT = 3333;
     private AppClient appClient;
 
-    public S_MyService(int port, AppClient appClient) {
-        super(8099);
-        this.appClient = appClient;
+    public S_MyService2(int port,AppClient appClient) {
+        super(port);
+        this.appClient =appClient;
     }
 
     @Override
-    public Response serve(IHTTPSession session) {
-        String uri = session.getUri();
+    protected Response serve(IHTTPSession session) {
+        String url = session.getUri();
         Map<String, String> map = new HashMap<>();
         Map<String, String> zMap = new HashMap<>();
         JSONObject bodyJson;
@@ -63,11 +66,10 @@ public class S_MyService extends NanoHTTPD {
             e.printStackTrace();
         }
         try {
-            switch (uri) {
+            switch (url) {
                 case "/add_ygxx_info":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                        session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     try {
                         YGXX ygxx = new YGXX();
                         ygxx.setName(bodyJson.getString("name"));
@@ -79,24 +81,23 @@ public class S_MyService extends NanoHTTPD {
                         ygxx.setEmail(bodyJson.getString("email"));
                         ygxx.setAddress(bodyJson.getString("address"));
                         ygxx.save();
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                     } catch (Exception e) {
                         e.printStackTrace();
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", "{\"RESULT\": \"F\"}");
                     }
                 case "/delete_all_ygxx":
                     LitePal.deleteAll(YGXX.class);
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                 case "/delete_single_ygxx":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                    session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     try {
                         LitePal.deleteAll(YGXX.class, "id=? and name=?", bodyJson.getString("id"), bodyJson.getString("name"));
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", "{\"RESULT\": \"F\"}");
                     }
 
                 case "/get_all_ygcx":
@@ -119,11 +120,10 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObjectz11 = new JSONObject();
                     jsonObjectz11.put("RESULT", "S");
                     jsonObjectz11.put("ROWS_DETAIL", jsonArrayz9);
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObjectz11.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObjectz11.toString());
                 case "/get_like_ygcx":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                    session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     List<YGXX> ygxxes2 =  LitePal.where("name like ?", "%" + bodyJson.getString("name") + "%").find(YGXX.class);
                     JSONArray jsonArrayz1 = new JSONArray();
                     for (int i = 0; i < ygxxes2.size(); i++) {
@@ -143,12 +143,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObjectz1 = new JSONObject();
                     jsonObjectz1.put("RESULT", "S");
                     jsonObjectz1.put("ROWS_DETAIL", jsonArrayz1);
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObjectz1.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObjectz1.toString());
 
                 case "/update_ygxx":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                    session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     try {
                         YGXX ygxx = new YGXX();
                         ygxx.setSex(bodyJson.getString("sex"));
@@ -159,10 +158,10 @@ public class S_MyService extends NanoHTTPD {
                         ygxx.setEmail(bodyJson.getString("email"));
                         ygxx.setAddress(bodyJson.getString("address"));
                         ygxx.updateAll("id=? and name=?", bodyJson.getString("id"), bodyJson.getString("name"));
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", "{\"RESULT\": \"F\"}");
                     }
                 case "/get_yl_yz":
                     List<YLYZ> ylyzs = LitePal.findAll(YLYZ.class);
@@ -180,21 +179,19 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject51 = new JSONObject();
                     jsonObject51.put("ROWS_DETAIL", jsonArray555);
                     jsonObject51.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject51.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject51.toString());
                 case "/set_yl_yz":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                    session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     YLYZ ylyz = new YLYZ();
                     ylyz.setNumber(bodyJson.optInt("yz"));
                     ylyz.updateAll("name=?", bodyJson.optString("ylmc"));
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"S\"}");
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", "{\"RESULT\": \"S\"}");
 
 
                 case "/update_gyslb":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Gyslb gyslb1 = new Gyslb();
                     gyslb1.setGysbh(bodyJson.getString("gysbh"));
                     gyslb1.setMc(bodyJson.getString("mc"));
@@ -208,13 +205,12 @@ public class S_MyService extends NanoHTTPD {
                     gyslb1.updateAll("gysbh=? and mc=?", bodyJson.getString("gysbh"), bodyJson.getString("mc"));
                     JSONObject jsonObject50 = new JSONObject();
                     jsonObject50.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject50.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject50.toString());
 
 
                 case "/update_tjyl":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Tjyl tjyl1 = new Tjyl();
                     tjyl1.setGysbh(bodyJson.getString("gysbh"));
                     tjyl1.setYlmc(bodyJson.getString("ylmc"));
@@ -224,25 +220,23 @@ public class S_MyService extends NanoHTTPD {
                     tjyl1.updateAll("gysbh=? and ylbh=?", bodyJson.getString("gysbh"), bodyJson.getString("ylbh"));
                     JSONObject jsonObject49 = new JSONObject();
                     jsonObject49.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject49.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject49.toString());
 
                 case "/delete_tjyl":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     LitePal.deleteAll(Tjyl.class, "gysbh=? and ylbh=?", bodyJson.getString("bh"), bodyJson.getString("ylbh"));
                     JSONObject jsonObject48 = new JSONObject();
                     jsonObject48.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject48.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject48.toString());
 
                 case "/delete_gylls":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     LitePal.deleteAll(Gyslb.class, "gysbh=? and mc=?", bodyJson.getString("bh"), bodyJson.getString("name"));
                     JSONObject jsonObject47 = new JSONObject();
                     jsonObject47.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject47.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject47.toString());
                 case "/get_gyslb":
                     List<Gyslb> gyslbs = LitePal.findAll(Gyslb.class);
                     JSONArray jsonArray22 = new JSONArray();
@@ -264,13 +258,12 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject46 = new JSONObject();
                     jsonObject46.put("ROWS_DETAIL", jsonArray22);
                     jsonObject46.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject46.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject46.toString());
 
 
                 case "/set_gyslb":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Gyslb gyslb = new Gyslb();
                     gyslb.setGysbh(bodyJson.getString("gysbh"));
                     gyslb.setMc(bodyJson.getString("mc"));
@@ -284,7 +277,7 @@ public class S_MyService extends NanoHTTPD {
                     gyslb.save();
                     JSONObject jsonObject45 = new JSONObject();
                     jsonObject45.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject45.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject45.toString());
 
 
                 case "/get_tjyl":
@@ -303,11 +296,10 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject44 = new JSONObject();
                     jsonObject44.put("ROWS_DETAIL", jsonArray21);
                     jsonObject44.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject44.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject44.toString());
                 case "/set_tjyl":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Tjyl tjyl = new Tjyl();
 
                     tjyl.setGysbh(bodyJson.getString("gysbh"));
@@ -318,13 +310,12 @@ public class S_MyService extends NanoHTTPD {
                     tjyl.save();
                     JSONObject jsonObject43 = new JSONObject();
                     jsonObject43.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject43.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject43.toString());
 
 
                 case "/update_factory_fbzp":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     FbzpA2 fbzp1 = new FbzpA2();
                     fbzp1.setShr(bodyJson.getString("shr"));
                     fbzp1.setShsj(bodyJson.getString("shsj"));
@@ -332,7 +323,7 @@ public class S_MyService extends NanoHTTPD {
                     fbzp1.updateAll("bh=? and naem=?", bodyJson.getString("bh"), bodyJson.getString("name"));
                     JSONObject jsonObject42 = new JSONObject();
                     jsonObject42.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject42.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject42.toString());
                 case "/get_factory_fbzp":
                     List<FbzpA2> fbzps = LitePal.findAll(FbzpA2.class);
                     JSONArray jsonArray3 = new JSONArray();
@@ -361,13 +352,12 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject6 = new JSONObject();
                     jsonObject6.put("ROWS_DETAIL", jsonArray3);
                     jsonObject6.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject6.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject6.toString());
 
 
                 case "/set_factory_fbzp":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     FbzpA2 fbzp = new FbzpA2();
                     fbzp.setBh(bodyJson.getString("bh"));
                     fbzp.setZt(bodyJson.getString("zt"));
@@ -390,7 +380,7 @@ public class S_MyService extends NanoHTTPD {
                     fbzp.save();
                     JSONObject jsonObject4 = new JSONObject();
                     jsonObject4.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject4.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject4.toString());
 
 
                 case "/get_order":
@@ -407,11 +397,10 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject23 = new JSONObject();
                     jsonObject23.put("ROWS_DETAIL", jsonArray11);
                     jsonObject23.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject23.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject23.toString());
                 case "/set_order":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Order1 dingdan = new Order1();
                     dingdan.setName(bodyJson.getString("name"));
                     dingdan.setJine(bodyJson.getString("jine"));
@@ -419,12 +408,11 @@ public class S_MyService extends NanoHTTPD {
                     dingdan.save();
                     JSONObject jsonObject22 = new JSONObject();
                     jsonObject22.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject22.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject22.toString());
 
                 case "/update_vehicle":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     List<VehicleA2> vehicleAS1 = LitePal.findAll(VehicleA2.class);
                     VehicleA2 vehicleA1 = new VehicleA2();
                     for (int i = 0; i < vehicleAS1.size(); i++) {
@@ -437,7 +425,7 @@ public class S_MyService extends NanoHTTPD {
                     vehicleA1.updateAll("name=? and clxh=?", bodyJson.getString("name"), bodyJson.getString("clxh"));
                     JSONObject jsonObject21 = new JSONObject();
                     jsonObject21.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject21.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject21.toString());
                 case "/get_vehiclea":
                     List<VehicleA2> vehicleAS = LitePal.findAll(VehicleA2.class);
                     JSONArray jsonArray17 = new JSONArray();
@@ -462,12 +450,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject40 = new JSONObject();
                     jsonObject40.put("ROWS_DETAIL", jsonArray17);
                     jsonObject40.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject40.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject40.toString());
 
                 case "/set_vehiclea":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     VehicleA2 vehicleA = new VehicleA2();
                     vehicleA.setName(bodyJson.getString("name"));
                     vehicleA.setClxh(bodyJson.getString("clxh"));
@@ -485,7 +472,7 @@ public class S_MyService extends NanoHTTPD {
                     vehicleA.save();
                     JSONObject jsonObject39 = new JSONObject();
                     jsonObject39.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject39.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject39.toString());
                 case "/get_automobile":
                     List<Automobile> automobiles = LitePal.findAll(Automobile.class);
                     JSONArray jsonArray16 = new JSONArray();
@@ -502,11 +489,10 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject38 = new JSONObject();
                     jsonObject38.put("ROWS_DETAIL", jsonArray16);
                     jsonObject38.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject38.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject38.toString());
                 case "/set_automobile":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Automobile automobile = new Automobile();
                     automobile.setCjh(bodyJson.getString("cjh"));
                     automobile.setScxh(bodyJson.getString("scxh"));
@@ -516,19 +502,18 @@ public class S_MyService extends NanoHTTPD {
                     automobile.save();
                     JSONObject jsonObject37 = new JSONObject();
                     jsonObject37.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject37.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject37.toString());
                 case "/update_repair":
 
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Repair1 repair1 = new Repair1();
                     repair1.setZt(bodyJson.getString("zt"));
                     repair1.setWxsj(bodyJson.getString("wxsj"));
                     repair1.updateAll("clbh=? and clxh=?", bodyJson.getString("clbh"), bodyJson.getString("clxh"));
                     JSONObject jsonObject36 = new JSONObject();
                     jsonObject36.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject36.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject36.toString());
                 case "/get_repair":
                     List<Repair1> repairs = LitePal.findAll(Repair1.class);
                     JSONArray jsonArray15 = new JSONArray();
@@ -546,12 +531,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject35 = new JSONObject();
                     jsonObject35.put("ROWS_DETAIL", jsonArray15);
                     jsonObject35.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject35.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject35.toString());
 
                 case "/set_repair":
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Repair1 repair = new Repair1();
                     repair.setWxsj(bodyJson.getString("wxsj"));
                     repair.setZt(bodyJson.getString("zt"));
@@ -563,7 +547,7 @@ public class S_MyService extends NanoHTTPD {
                     repair.save();
                     JSONObject jsonObject34 = new JSONObject();
                     jsonObject34.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject34.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject34.toString());
                 case "/get_scx":
                     List<Scx> scxes = LitePal.findAll(Scx.class);
                     JSONArray jsonArray14 = new JSONArray();
@@ -580,12 +564,12 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject33 = new JSONObject();
                     jsonObject33.put("ROWS_DETAIL", jsonArray14);
                     jsonObject33.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject33.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject33.toString());
 
                 case "/set_scx":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Scx scx = new Scx();
                     scx.setCjm(bodyJson.getString("bh"));
                     scx.setScxm(bodyJson.getString("scxm"));
@@ -595,32 +579,32 @@ public class S_MyService extends NanoHTTPD {
                     scx.save();
                     JSONObject jsonObject32 = new JSONObject();
                     jsonObject32.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject32.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject32.toString());
 
                 case "/update_ms":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Ktdga ktdg3 = new Ktdga();
                     ktdg3.setMs(bodyJson.getString("ms"));
                     ktdg3.updateAll("bianhao=?", bodyJson.getString("bianhao"));
                     JSONObject jsonObject31 = new JSONObject();
                     jsonObject31.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject31.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject31.toString());
                 case "/update_wd":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Ktdga ktdg2 = new Ktdga();
                     ktdg2.setDushu(bodyJson.getString("wd"));
                     ktdg2.updateAll("bianhao=?", bodyJson.getString("bianhao"));
                     JSONObject jsonObject30 = new JSONObject();
                     jsonObject30.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject30.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject30.toString());
                 case "/update_ktkg":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Ktdga ktdg1 = new Ktdga();
                     if (bodyJson.get("pd").equals("灯光")) {
                         ktdg1.setDg(bodyJson.getString("zt"));
@@ -631,7 +615,7 @@ public class S_MyService extends NanoHTTPD {
                     ktdg1.updateAll("bianhao=?", bodyJson.getString("bianhao"));
                     JSONObject jsonObject29 = new JSONObject();
                     jsonObject29.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject29.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject29.toString());
                 case "/get_ktkg":
                     List<Ktdga> ktdgs = LitePal.findAll(Ktdga.class);
                     JSONArray jsonArray13 = new JSONArray();
@@ -648,11 +632,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject28 = new JSONObject();
                     jsonObject28.put("ROWS_DETAIL", jsonArray13);
                     jsonObject28.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject28.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject28.toString());
                 case "/set_ktkg":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Ktdga ktdg = new Ktdga();
                     ktdg.setBianhao(bodyJson.getString("bh"));
                     ktdg.setDg(bodyJson.getString("dg"));
@@ -662,7 +646,7 @@ public class S_MyService extends NanoHTTPD {
                     ktdg.save();
                     JSONObject jsonObject27 = new JSONObject();
                     jsonObject27.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject27.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject27.toString());
                 case "/get_hjzb":
                     Random random1 = new Random();
                     JSONObject jsonObject25 = new JSONObject();
@@ -703,7 +687,7 @@ public class S_MyService extends NanoHTTPD {
 
                     jsonObject25.put("ROWS_DETAIL", jsonArray12);
                     jsonObject25.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject25.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject25.toString());
 
 
                 case "/get_stock_shipment":
@@ -726,13 +710,12 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject18 = new JSONObject();
                     jsonObject18.put("ROWS_DETAIL", jsonArray9);
                     jsonObject18.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject18.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject18.toString());
 
                 case "/set_stock_shipment":
-
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
 
                     Shipment1 shipment = new Shipment1();
                     shipment.setName(bodyJson.getString("name"));
@@ -747,7 +730,7 @@ public class S_MyService extends NanoHTTPD {
                     shipment.save();
                     JSONObject jsonObject17 = new JSONObject();
                     jsonObject17.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject17.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject17.toString());
 
                 case "/get_stock_warehousing":
                     List<Warehousing> warehousings = LitePal.findAll(Warehousing.class);
@@ -772,11 +755,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject16 = new JSONObject();
                     jsonObject16.put("ROWS_DETAIL", jsonArray8);
                     jsonObject16.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject16.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject16.toString());
                 case "/set_stock_warehousing":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
 
                     Warehousing warehousing = new Warehousing();
                     warehousing.setName(bodyJson.getString("name"));
@@ -794,7 +777,7 @@ public class S_MyService extends NanoHTTPD {
                     warehousing.save();
                     JSONObject jsonObject15 = new JSONObject();
                     jsonObject15.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject15.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject15.toString());
 
                 case "/get_supplier_transaction":
                     List<Transaction1> transactions = LitePal.findAll(Transaction1.class);
@@ -816,12 +799,12 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject14 = new JSONObject();
                     jsonObject14.put("ROWS_DETAIL", jsonArray7);
                     jsonObject14.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject14.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject14.toString());
 
                 case "/set_supplier_transaction":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Transaction1 transaction = new Transaction1();
                     transaction.setChangshang(bodyJson.getString("csm"));
                     transaction.setCailiaoming(bodyJson.getString("clm"));
@@ -835,7 +818,7 @@ public class S_MyService extends NanoHTTPD {
                     transaction.save();
                     JSONObject jsonObject13 = new JSONObject();
                     jsonObject13.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject13.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject13.toString());
                 case "/get_supplier_material":
                     List<MaterialA1> materials = LitePal.findAll(MaterialA1.class);
                     JSONArray jsonArray6 = new JSONArray();
@@ -854,11 +837,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject12 = new JSONObject();
                     jsonObject12.put("ROWS_DETAIL", jsonArray6);
                     jsonObject12.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject12.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject12.toString());
                 case "/set_supplier_material":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
 
                     MaterialA1 material = new MaterialA1();
                     material.setPath(bodyJson.getString("path"));
@@ -874,7 +857,7 @@ public class S_MyService extends NanoHTTPD {
                     ylyz1.save();
                     JSONObject jsonObject11 = new JSONObject();
                     jsonObject11.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject11.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject11.toString());
                 //----------------------------------------------------------------------------------------------
                 case "/get_factory_application":
                     List<Application1> applications = LitePal.findAll(Application1.class);
@@ -892,11 +875,11 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject9 = new JSONObject();
                     jsonObject9.put("ROWS_DETAIL", jsonArray5);
                     jsonObject9.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject9.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject9.toString());
                 case "/set_factory_application":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Application1 application = new Application1();
                     application.setBh(bodyJson.getString("bh"));
                     application.setGsm(bodyJson.getString("gsm"));
@@ -906,7 +889,7 @@ public class S_MyService extends NanoHTTPD {
                     application.save();
                     JSONObject jsonObject8 = new JSONObject();
                     jsonObject8.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject8.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject8.toString());
                 case "/get_factory_information":
                     List<Jbxxsql> jbxxes = LitePal.findAll(Jbxxsql.class);
                     JSONArray jsonArray4 = new JSONArray();
@@ -932,12 +915,12 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject7 = new JSONObject();
                     jsonObject7.put("ROWS_DETAIL", jsonArray4);
                     jsonObject7.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject7.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject7.toString());
 
                 case "/update_factory_information":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Jbxxsql jbxx1 = new Jbxxsql();
                     jbxx1.setName(bodyJson.getString("name"));
                     jbxx1.setSex(bodyJson.getString("sex"));
@@ -956,13 +939,13 @@ public class S_MyService extends NanoHTTPD {
                     jbxx1.updateAll("user=?", bodyJson.getString("user"));
                     JSONObject jsonObject10 = new JSONObject();
                     jsonObject10.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject10.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject10.toString());
 
 
                 case "/set_factory_information":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     Jbxxsql jbxx = new Jbxxsql();
                     jbxx.setName(bodyJson.getString("name"));
                     jbxx.setSex(bodyJson.getString("sex"));
@@ -981,11 +964,11 @@ public class S_MyService extends NanoHTTPD {
                     jbxx.save();
                     JSONObject jsonObject5 = new JSONObject();
                     jsonObject5.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject5.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject5.toString());
                 case "/set_login":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
 
                     User2 user1 = new User2();
                     user1.setUsername(bodyJson.getString("username"));
@@ -995,7 +978,7 @@ public class S_MyService extends NanoHTTPD {
                     user1.save();
                     JSONObject jsonObject3 = new JSONObject();
                     jsonObject3.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject3.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject3.toString());
                 case "/get_login":
                     List<User2> muser = LitePal.findAll(User2.class);
                     JSONArray jsonArray1 = new JSONArray();
@@ -1011,7 +994,7 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject2 = new JSONObject();
                     jsonObject2.put("ROWS_DETAIL", jsonArray1);
                     jsonObject2.put("RESULT", "S");
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject2.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject2.toString());
                 case "/get_factory_info":
                     Log.d("111111111111111", "serve: ---" + appClient.getLight());
                     Random random = new Random();
@@ -1059,13 +1042,12 @@ public class S_MyService extends NanoHTTPD {
 
                     jsonObject.put("RESULT", "S");
 
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject.toString());
 
                 case "/set_factory_air":
-
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     if ("冷风".equals(bodyJson.getString("air"))) {
                         appClient.setLight(true);
                     } else if ("热风".equals(bodyJson.getString("air"))) {
@@ -1074,12 +1056,12 @@ public class S_MyService extends NanoHTTPD {
                         return null;
                     }
 
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
 
                 case "/set_factory_light":
+                    
                     session.parseBody(map);
-                    body = map.get("postData");
-                    bodyJson = new JSONObject(body);
+                        bodyJson = new JSONObject(map.get("postData"));
                     if ("开启".equals(bodyJson.getString("light"))) {
                         appClient.setLight(true);
                     } else if ("关闭".equals(bodyJson.getString("light"))) {
@@ -1087,16 +1069,15 @@ public class S_MyService extends NanoHTTPD {
                     } else {
                         return null;
                     }
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                 case "/send_notifi_info":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                    session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     TZ_SQL sql = new TZ_SQL(1, bodyJson.optString("name"), bodyJson.optString("msg"), SimpData.Simp(new Date(), "yyyy-MM-dd"));
                     if (sql.save()) {
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                     } else {
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", "{\"RESULT\": \"F\"}");
                     }
                 case "/get_notifi_info":
                     List<TZ_SQL> tz_sqls = LitePal.where("state=?", "1").find(TZ_SQL.class);
@@ -1114,33 +1095,28 @@ public class S_MyService extends NanoHTTPD {
                     JSONObject jsonObject20 = new JSONObject();
                     jsonObject20.put("RESULT", "S");
                     jsonObject20.put("ROWS_DETAIL", jsonArray20);
-                    return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject20.toString());
+                    return Response.newFixedLengthResponse(Status.OK, "application/json", jsonObject20.toString());
                 case "/request_notif_info":
-                    session.parseBody(zMap);
-                    body = zMap.get("postData");
-                    bodyJson = new JSONObject(body);
+                    session.parseBody(map);
+                        bodyJson = new JSONObject(map.get("postData"));
                     TZ_SQL tz_sql = new TZ_SQL();
                     tz_sql.setState(2);
                     tz_sql.setRequestInfo(bodyJson.optString("request"));
                     if (tz_sql.updateAll("id=?", bodyJson.optString("id")) != 0) {
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", allJson.toString());
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", allJson.toString());
                     } else {
-                        return newFixedLengthResponse(Response.Status.OK, "application/json", "{\"RESULT\": \"F\"}");
+                        return Response.newFixedLengthResponse(Status.OK, "application/json", "{\"RESULT\": \"F\"}");
                     }
 
             }
 
         } catch (JSONException e) {
-
             e.printStackTrace();
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ResponseException e) {
             e.printStackTrace();
         }
-
         return null;
-
     }
 }
