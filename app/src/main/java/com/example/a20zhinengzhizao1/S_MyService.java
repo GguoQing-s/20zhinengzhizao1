@@ -4,7 +4,7 @@ package com.example.a20zhinengzhizao1;
 import android.util.Log;
 
 
-import com.example.a20zhinengzhizao1.bean1.Application;
+import com.example.a20zhinengzhizao1.bean1.Application1;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
 
 import com.example.a20zhinengzhizao1.bean1.FbzpA2;
@@ -28,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
-import org.litepal.crud.LitePalSupport;
 
 import java.io.IOException;
 import java.util.Date;
@@ -778,11 +777,13 @@ public class S_MyService extends NanoHTTPD {
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject11.toString());
                 //----------------------------------------------------------------------------------------------
                 case "/get_factory_application":
-                    List<Application> applications = LitePal.findAll(Application.class);
+                    List<Application1> applications = LitePal.findAll(Application1.class);
                     JSONArray jsonArray5 = new JSONArray();
                     for (int i = 0; i < applications.size(); i++) {
-                        Application application = applications.get(i);
+                        Application1 application = applications.get(i);
                         JSONObject jsonObject41 = new JSONObject();
+                        jsonObject41.put("bh", application.getBh());
+                        jsonObject41.put("gsm", application.getGsm());
                         jsonObject41.put("username", application.getUsername());
                         jsonObject41.put("path", application.getPath());
                         jsonObject41.put("time", application.getTime());
@@ -796,7 +797,9 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson = new JSONObject(body);
-                    Application application = new Application();
+                    Application1 application = new Application1();
+                    application.setBh(bodyJson.getString("bh"));
+                    application.setGsm(bodyJson.getString("gsm"));
                     application.setUsername(bodyJson.getString("username"));
                     application.setPath(bodyJson.getString("path"));
                     application.setTime(bodyJson.getString("time"));

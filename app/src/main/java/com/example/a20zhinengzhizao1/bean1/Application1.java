@@ -2,20 +2,38 @@ package com.example.a20zhinengzhizao1.bean1;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Application extends LitePalSupport {
-    private String username,path,time;
+public class Application1 extends LitePalSupport {
+    private String bh,gsm,username,path,time;
 
-    public Application() {
+    public Application1() {
     }
 
     @Override
     public String toString() {
-        return "Application{" +
-                "username='" + username + '\'' +
+        return "Application1{" +
+                "bh='" + bh + '\'' +
+                ", gsm='" + gsm + '\'' +
+                ", username='" + username + '\'' +
                 ", path='" + path + '\'' +
+                ", time='" + time + '\'' +
                 '}';
     }
 
+    public String getBh() {
+        return bh;
+    }
+
+    public void setBh(String bh) {
+        this.bh = bh;
+    }
+
+    public String getGsm() {
+        return gsm;
+    }
+
+    public void setGsm(String gsm) {
+        this.gsm = gsm;
+    }
 
     public String getUsername() {
         return username;

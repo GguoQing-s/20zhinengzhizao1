@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname  value="Service"></dbname>
-    <version value="139"></version>
+    <version value="140"></version>
     <list>
         <mapping class="com.example.a20zhinengzhizao1.bean1.User2"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Jbxxsql"></mapping>
-        <mapping class="com.example.a20zhinengzhizao1.bean1.Application"></mapping>
+        <mapping class="com.example.a20zhinengzhizao1.bean1.Application1"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.MaterialA1"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Transaction1"></mapping>
         <mapping class="com.example.a20zhinengzhizao1.bean1.Warehousing"></mapping>
