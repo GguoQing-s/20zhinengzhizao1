@@ -4,7 +4,7 @@ package com.example.a20zhinengzhizao1;
 import android.util.Log;
 
 
-import com.example.a20zhinengzhizao1.bean1.Application1;
+import com.example.a20zhinengzhizao1.bean1.ApplicationA;
 import com.example.a20zhinengzhizao1.bean1.Automobile;
 
 import com.example.a20zhinengzhizao1.bean1.FbzpA2;
@@ -912,10 +912,10 @@ public class S_MyService extends NanoHTTPD {
                     return newFixedLengthResponse(Response.Status.OK, "application/json", jsonObject11.toString());
                 //----------------------------------------------------------------------------------------------
                 case "/get_factory_application":
-                    List<Application1> applications = LitePal.findAll(Application1.class);
+                    List<ApplicationA> applications = LitePal.findAll(ApplicationA.class);
                     JSONArray jsonArray5 = new JSONArray();
                     for (int i = 0; i < applications.size(); i++) {
-                        Application1 application = applications.get(i);
+                        ApplicationA application = applications.get(i);
                         JSONObject jsonObject41 = new JSONObject();
                         jsonObject41.put("bh", application.getBh());
                         jsonObject41.put("gsm", application.getGsm());
@@ -932,7 +932,7 @@ public class S_MyService extends NanoHTTPD {
                     session.parseBody(map);
                     body = map.get("postData");
                     bodyJson = new JSONObject(body);
-                    Application1 application = new Application1();
+                    ApplicationA application = new ApplicationA();
                     application.setBh(bodyJson.getString("bh"));
                     application.setGsm(bodyJson.getString("gsm"));
                     application.setUsername(bodyJson.getString("username"));

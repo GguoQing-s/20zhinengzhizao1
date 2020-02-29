@@ -17,7 +17,7 @@ import org.json.JSONObject;
  */
 //192.168.1.24
 public class VolleyTo extends Thread  {//localhost
-    private String Url="http://localhost:3333/";
+    private String Url="http://192.168.1.24:8099/";
     private JSONObject jsonObject=new JSONObject();
     private int Time;
     private boolean isLoop;

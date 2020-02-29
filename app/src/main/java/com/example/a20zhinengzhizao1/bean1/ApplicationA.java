@@ -2,10 +2,10 @@ package com.example.a20zhinengzhizao1.bean1;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Application1 extends LitePalSupport {
+public class ApplicationA extends LitePalSupport {
     private String bh,gsm,username,path,time;
 
-    public Application1() {
+    public ApplicationA() {
     }
 
     @Override
